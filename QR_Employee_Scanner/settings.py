@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = os.getenv("DEBUG", "False") == "True"
+
+# Set ALLOWED_HOSTS (replace with your Render domain)
+# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,QR_Employee_Scanner.onrender.com").split(",")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +35,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r&o&t(5+mwh54*fih=kj4iq!*3tzr&%8mut3$g7-_!t*m!zlx^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -122,3 +134,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Add this line to define where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
