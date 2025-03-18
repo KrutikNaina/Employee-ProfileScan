@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        #btn1 {
+            background-image: radial-gradient(#027882, #024045);
+            color: white;
+            border-color: #024045;
+            border-radius: 30px;
+            width: 120px;
+            height: 32px;
+            margin-left: 80px;
+        }
+    </style>
+
+    <title>Insert Employee Data</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
+            <center>Insert Employee Data</center>
+        </div>
+    </div>
+
+    <form class="form-horizontal" action="/update/">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Name</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="txt" class="form-control" value="{{ showdata.ename }}" name="ename" placeholder="Name">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Address</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="txt" class="form-control" value="{{ showdata.eadd }}" name="eadd" id="pwd"
+                        placeholder="Address">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Salary</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="txt" class="form-control" value="{{ showdata.esal }}" name="esalary"
+                        placeholder="Salary">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">User Id</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" name="euserid" value="{{ showdata.euserid }}"
+                        placeholder="User Id">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Password</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" name="epassword" value="{{ showdata.epassword }}"
+                        placeholder="Password">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Profile Images</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="file" class="form-control" name="epassword" value="{{ showdata.epassword }}"
+                        placeholder="Password">
+                </div>
+            </div>
+        </div><br>
+
+        <input type="submit" value="Insert" id="btn1" style="margin-left:200px;">
+        <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;" href="/showall/">Show-All Data</a></button>
+
+    </form>
+
+</body>
+
+</html>

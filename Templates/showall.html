@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function confirms() {
+            return confirm("Are you sure!");
+        }
+
+    </script>
+
+    <style type="text/css">
+        #btn1 {
+            background-image: radial-gradient(#027882, #024045);
+            color: white;
+            border-color: #024045;
+            border-radius: 30px;
+            width: 120px;
+            height: 32px;
+        }
+    </style>
+
+    <title>Employee Data Show</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
+            <center>Show Data</center>
+        </div>
+    </div>
+    <center>
+    <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;"
+            href="/insert/">Privious</a></button></center><br>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr class="success">
+                    <th>Employe Name</th>
+                    <th>Employe Address</th>
+                    <th>Employe Salary</th>
+                    <th>Employe Images</th>
+                    <th>Employe Userid</th>
+                    <th></th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in showdata %}
+                <form>
+                    <tr>
+                        <th width="16%"> {{ x.ename }} </th>
+                        <th width="16%"> {{ x.eadd }} </th>
+                        <th width="16%"> {{ x.esal }} </th>
+                        <th width="16%"> <img src="/media/{{ x.eimg }}" style="width:30%;"></th>
+                        <th width="16%"> <a href="/myprofile/{{ x.euserid }}">{{ x.euserid }}</a></th>
+                        <th width="16%"> <a href="/delete/{{ x.euserid }}" onclick="return confirms()">Delete</a></th>
+                    </tr>
+                </form>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</body>
+
+</html>
