@@ -40,16 +40,18 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://employee-profilescan.onrender.com",
-]
-
+import os
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "https://employee-profilescan.onrender.com",  # Replace with your actual Render domain
+    "employee-profilescan.onrender.com",  # Make sure this is included
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://employee-profilescan.onrender.com",
+]
+
 
 
 # Application definition
