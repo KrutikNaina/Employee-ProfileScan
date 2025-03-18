@@ -40,6 +40,12 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "https://employee-profilescan.onrender.com",  # Replace with your actual Render domain
+]
+
 
 # Application definition
 
