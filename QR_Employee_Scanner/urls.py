@@ -21,6 +21,7 @@ from QR_Employee_Scanner import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('insert/',views.insert),
-    path('showall/',views.showall),
+    # path("", include("QR_Employee_Scanner.urls")),  # Include your app's URLs
+    path("",views.insert),
+    path("showall/",views.showall),
 ]
