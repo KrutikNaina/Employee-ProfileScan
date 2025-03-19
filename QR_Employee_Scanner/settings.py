@@ -36,20 +36,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r&o&t(5+mwh54*fih=kj4iq!*3tzr&%8mut3$g7-_!t*m!zlx^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
-# ALLOWED_HOSTS = [
-#     "127.0.0.1",
-#     "localhost",
-#     "employee-profilescan.onrender.com",  # Make sure this is included
-# ]
+
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "employee-profilescan.onrender.com",  # Make sure this is included
+]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://employee-profilescan.onrender.com",
