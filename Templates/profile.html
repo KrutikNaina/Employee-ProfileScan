@@ -44,6 +44,15 @@
 
     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
         {% csrf_token %}
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Profile Images</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <img src="/media/{{ showdata.eimg }}" alt="{{ showdata.ename }}" width="100">
+
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="form-group">
@@ -51,7 +60,8 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" class="form-control" name="eid" placeholder="User Id" required>
+                        <input type="text" class="form-control" value="{{ showdata.eid }}" name="eid"
+                            placeholder="User Id" readonly>
                     </div>
                 </div>
             </div>
@@ -60,7 +70,8 @@
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="ename" placeholder="Name" required>
+                    <input type="txt" class="form-control" value="{{ showdata.ename }}" name="ename" placeholder="Name"
+                        readonly>
                 </div>
             </div>
         </div>
@@ -70,7 +81,8 @@
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="eadd" id="pwd" placeholder="Address" required>
+                    <input type="txt" class="form-control" name="eadd" value="{{ showdata.eadd }}" id="pwd"
+                        placeholder="Address" readonly>
                 </div>
             </div>
         </div>
@@ -81,7 +93,8 @@
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="esal" placeholder="Salary" required>
+                    <input type="txt" class="form-control" name="esal" value="{{ showdata.esal }}" placeholder="Salary"
+                        readonly>
                 </div>
             </div>
         </div>
@@ -92,32 +105,15 @@
             <div class="col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" name="ecity" placeholder="City" required>
+                    <input type="text" class="form-control" name="ecity" value="{{ showdata.ecity }}" placeholder="City"
+                        readonly>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Profile Images</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="file" class="form-control" name="eimg" placeholder="Profile Images" required>
-                </div>
-            </div>
-        </div><br>
-
-        <input type="submit" onclick="return confirms()" value="Insert" id="btn1" style="margin-left:200px;">
-        <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;"
-                href="/showall/">Show-All Data</a></button>
 
     </form>
 
-    <script type="text/javascript">
-        function confirms() {
-            return confirm("Data insert!");
-        }
-        </script>
 </body>
 
 </html>

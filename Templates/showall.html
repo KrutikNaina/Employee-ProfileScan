@@ -48,11 +48,12 @@
         <table class="table table-hover">
             <thead>
                 <tr class="success">
+                    <th>Employe id</th>
                     <th>Employe Name</th>
                     <th>Employe Address</th>
                     <th>Employe Salary</th>
+                    <th>Employe City</th>
                     <th>Employe Images</th>
-                    <th>Employe Userid</th>
                     <th></th>
                     <th> </th>
                 </tr>
@@ -61,12 +62,13 @@
                 {% for x in showdata %}
                 <form>
                     <tr>
+                        <th width="16%"> <a href="/profile/{{ x.eid }}">{{ x.eid }}</a></th>
                         <th width="16%"> {{ x.ename }} </th>
                         <th width="16%"> {{ x.eadd }} </th>
                         <th width="16%"> {{ x.esal }} </th>
+                        <th width="16%"> {{ x.ecity }} </th>
                         <th width="16%"> <img src="/media/{{ x.eimg }}" style="width:30%;"></th>
-                        <th width="16%"> <a href="/myprofile/{{ x.euserid }}">{{ x.euserid }}</a></th>
-                        <th width="16%"> <a href="/delete/{{ x.euserid }}" onclick="return confirms()">Delete</a></th>
+                        <th width="16%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
                     </tr>
                 </form>
                 {% endfor %}

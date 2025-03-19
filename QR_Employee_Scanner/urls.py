@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from QR_Employee_Scanner import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
@@ -24,5 +27,10 @@ urlpatterns = [
     # path("", include("QR_Employee_Scanner.urls")),  # Include your app's URLs
     path("",views.insert, name="insert"),
     path("showall/",views.showall, name="showall"),
+    path("profile/<str:userid>",views.profile, name="profile"),
+    path("insertafter/",views.insertafter   , name="insertafter"),
+    path('delete/<str:userid>',views.delete),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
