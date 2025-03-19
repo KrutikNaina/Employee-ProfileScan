@@ -67,7 +67,7 @@
                         <th width="16%"> {{ x.eadd }} </th>
                         <th width="16%"> {{ x.esal }} </th>
                         <th width="16%"> {{ x.ecity }} </th>
-                        <th width="16%"> <img src="/media/{{ x.eimg }}" style="width:30%;"></th>
+                        <th width="16%"> <img src="{{ x.eimg.url }}" style="width:30%;"></th>
                         <th width="16%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
                     </tr>
                 </form>
