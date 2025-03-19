@@ -25,3 +25,4 @@ urlpatterns = [
     path("",views.insert, name="insert"),
     path("showall/",views.showall, name="showall"),
 ]
+
