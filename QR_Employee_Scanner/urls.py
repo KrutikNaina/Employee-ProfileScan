@@ -16,17 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from db.models import Employee, Login
+from db.models import Employee, Register
 from QR_Employee_Scanner import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404
+from QR_Employee_Scanner.views import custom_404_view  
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", include("QR_Employee_Scanner.urls")),  # Include your app's URLs
-    path("insert/",views.insert, name="insert"),
+    path("",views.insert, name="insert"),
     path("showall/",views.showall, name="showall"),
     path("login/",views.login, name="login"),
     path("signup/",views.signup, name="signup"),
@@ -35,7 +37,11 @@ urlpatterns = [
     path("profile/<str:userid>",views.profile, name="profile"),
     path("insertafter/",views.insertafter, name="insertafter"),
     path('delete/<str:userid>',views.delete),
+    path('logout/', views.logout, name='logout'),
 ]
+
+handler404 = 'QR_Employee_Scanner.views.custom_404_view'  # ✅ Use the actual app name
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

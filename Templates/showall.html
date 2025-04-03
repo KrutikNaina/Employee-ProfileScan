@@ -38,9 +38,40 @@
 <body>
     <div class="container">
         <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
-            <center>Show Data</center>
+            <center>Show Data <a data-toggle="modal" style="cursor: pointer; text-decoration: none;
+                display: inline-block; 
+                color: red" data-target="#myModal"> Welcome {{ user_name }}</a></center>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>If you are Log Out click this Button</p>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                        <button type="button" class="btn1 btn-warning" style="text-decoration: none;
+                            display: inline-block; color: white;" onclick="delayedLogout()">
+                            Log Out
+                        </button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function delayedLogout() {
+            setTimeout(function () {
+                window.location.href = "{% url 'logout' %}";
+            }, 1000); // 2-second delay
+        }
+    </script>
     <center>
         <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;"
                 href="{% url 'insert' %}">Privious</a></button>

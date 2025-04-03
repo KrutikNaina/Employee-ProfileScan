@@ -10,7 +10,7 @@ class Employee(models.Model):
     ecity = models.CharField(max_length=30)
     eimg=models.FileField(upload_to='upload/', max_length=250, null=True, default=None)
 
-class Login(models.Model):
+class Register(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=30)

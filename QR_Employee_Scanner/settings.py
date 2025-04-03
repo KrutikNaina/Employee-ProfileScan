@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-r&o&t(5+mwh54*fih=kj4iq!*3tzr&%8mut3$g7-_!t*m!zlx^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [ "employee-profilescan.onrender.com",
     "localhost",
