@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from db.models import Employee, Login
 from QR_Employee_Scanner import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,10 +26,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", include("QR_Employee_Scanner.urls")),  # Include your app's URLs
-    path("",views.insert, name="insert"),
+    path("insert/",views.insert, name="insert"),
     path("showall/",views.showall, name="showall"),
+    path("login/",views.login, name="login"),
+    path("signup/",views.signup, name="signup"),
+    path("signupafter/",views.signupafter, name="signupafter"),
+    path('loginafter/',views.loginafter, name="loginafter"),
     path("profile/<str:userid>",views.profile, name="profile"),
-    path("insertafter/",views.insertafter   , name="insertafter"),
+    path("insertafter/",views.insertafter, name="insertafter"),
     path('delete/<str:userid>',views.delete),
 ]
 

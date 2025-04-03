@@ -36,17 +36,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r&o&t(5+mwh54*fih=kj4iq!*3tzr&%8mut3$g7-_!t*m!zlx^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+DEBUG = True
+
+ALLOWED_HOSTS = [ ]
+# DEBUG = os.getenv("DEBUG", "False") == "True"
+
+# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "employee-profilescan.onrender.com",  # Make sure this is included
-]
+# ALLOWED_HOSTS = [
+#     "127.0.0.1",
+#     "localhost",
+#     "employee-profilescan.onrender.com",  # Make sure this is included
+# ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://employee-profilescan.onrender.com",
@@ -144,14 +148,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 # Ensure the STATICFILES_DIRS path exists
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # Make sure this directory exists
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),  # Make sure this directory exists
+# ]
 
 # Where Django collects static files for production
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
@@ -160,7 +167,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add this line to define where static files will be collected
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
