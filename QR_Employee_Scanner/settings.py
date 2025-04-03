@@ -39,7 +39,9 @@ SECRET_KEY = 'django-insecure-r&o&t(5+mwh54*fih=kj4iq!*3tzr&%8mut3$g7-_!t*m!zlx^
 
 DEBUG = True
 
-ALLOWED_HOSTS = [ ]
+ALLOWED_HOSTS = [ "employee-profilescan.onrender.com",
+    "localhost",
+    "127.0.0.1"]
 # DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
