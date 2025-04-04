@@ -111,6 +111,12 @@
             </div>
         </div>
 
+        {% if showdata.qr_code %}
+        <img src="{{ showdata.qr_code.url }}" alt="QR Code" width="200" height="200">
+        {% else %}
+        <p>No QR code generated yet.</p>
+        <a href="{% url 'generate_qr_image' showdata.eid %}">Generate QR Code</a>
+        {% endif %}
 
     </form>
 

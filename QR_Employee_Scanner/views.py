@@ -2,12 +2,32 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from db.models import Employee, Register
 from django.contrib import messages
+from io import BytesIO
+from django.core.files import File
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password, make_password
 from django.http import HttpResponseRedirect
+import qrcode #QR 
 import logging
 
+
+
+def generate_qr_and_save(request, eid):
+    employee = get_object_or_404(Employee, eid=eid)
+    qr_data = f"http://127.0.0.1:8000/profile/{employee.eid}/"
+
+    # Generate QR Code
+    qr_img = qrcode.make(qr_data)
+    buffer = BytesIO()
+    qr_img.save(buffer)
+    filename = f'{employee.eid}_qr.png'
+
+    # Save to employee
+    employee.qr_code.save(filename, File(buffer), save=True)
+
+    return render(request, 'profile.html', {'showdata': employee})
 
 # Set up a logger
 logger = logging.getLogger(__name__)
@@ -88,6 +108,7 @@ def showall(request):
         })
     else:
         return redirect('/login/')  # Redirect to login if not logged in
+
 def insertafter(request):
 	eid = (request.POST["eid"])
 	ename = (request.POST["ename"])
