@@ -9,7 +9,8 @@ class Employee(models.Model):
     esal = models.IntegerField()
     ecity = models.CharField(max_length=30)
     eimg=models.FileField(upload_to='upload/', max_length=250, null=True, default=None)
-    qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)  # QR image
+    qr_code = models.ImageField(upload_to='qr_codes/', null=True, blank=True)
+
 
 class Register(models.Model):
     name = models.CharField(max_length=30)

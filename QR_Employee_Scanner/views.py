@@ -16,7 +16,7 @@ import logging
 
 def generate_qr_and_save(request, eid):
     employee = get_object_or_404(Employee, eid=eid)
-    qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
+    qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}"
 
     # Generate QR Code
     qr_img = qrcode.make(qr_data)
