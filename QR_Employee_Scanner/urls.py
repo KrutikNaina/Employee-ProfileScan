@@ -34,7 +34,7 @@ urlpatterns = [
     path("signup/",views.signup, name="signup"),
     path("signupafter/",views.signupafter, name="signupafter"),
     path('loginafter/',views.loginafter, name="loginafter"),
-    path("profile/<str:userid>",views.profile, name="profile"),
+    path('profile/<str:userid>/', views.profile, name='profile'),
     path("insertafter/",views.insertafter, name="insertafter"),
     path('delete/<str:userid>',views.delete),
     path('generate_qr_image/<str:eid>/', views.generate_qr_and_save, name='generate_qr_image'),
