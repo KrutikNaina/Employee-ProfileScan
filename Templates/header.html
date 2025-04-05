@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn1 {
+            margin-top: 10px;
+            width: 150px;
+            height: 30px;
+            color: black;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Navbar start -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#tour">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/showall/" data-toggle="tooltip" data-placement="bottom"
+                    title="Site-Name!">Employee Management System</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="tour">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'insert' %}" data-toggle="tooltip" data-placement="bottom" title="Insert!">Insert</a></li>
+                    <li><a href="/showall/" data-toggle="tooltip" data-placement="bottom" title="Showall!">Showall</a></li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- <li data-toggle="tooltip" data-placement="bottom" title="User Name!">Welcome {{ user_name }}</a></li> -->
+                    <li><a data-toggle="tooltip" data-placement="bottom" title="User Name!">Welcome {{ user_name }}</a></li>
+
+                    <li><button class="btn1 btn-warning" data-toggle="tooltip" data-placement="bottom" title="Log Out!"
+                            style="margin-right: 20px;">
+                            <a  style="text-decoration: none;
+                               display: inline-block; 
+                               color: white;" onclick="delayedLogout()">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+    <script>
+        function delayedLogout() {
+            setTimeout(function () {
+                window.location.href = "{% url 'logout' %}";
+            }, 1000); // 2-second delay
+        }
+    </script>
+
+
+</body>
+
+</html>

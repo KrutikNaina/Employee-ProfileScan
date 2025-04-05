@@ -30,49 +30,83 @@
             height: 32px;
             margin-left: 80px;
         }
+                /* spinner css start */
+                .spinner-wrapper {
+            width: 100%;
+            height: 100%;
+            background-color: #f8f6f6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            position: relative;
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+        }
+
+        .spinner::before,
+        .spinner:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .spinner:before {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(90deg, #c59d5f 0%, #515151 100%);
+            animation: spin .5s infinite linear;
+        }
+
+        .spinner:after {
+            width: 90%;
+            height: 90%;
+            background-color: #f3f0f0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* spinner css end */
     </style>
 
     <title>Insert Employee Data</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
-            <center>Insert Employee Data <a data-toggle="modal" style="cursor: pointer; text-decoration: none;
-                display: inline-block; 
-                color: red" data-target="#myModal"> Welcome {{ user_name }}</a></center>
+    {% include 'header.html' %}
+     <!--  spinner Effect  -->
+     <div class="spinner-wrapper">
+        <div class="spinner">
         </div>
     </div>
+    <script type="text/javascript">
+        let spinnerWrapper = document.querySelector('.spinner-wrapper');
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <p>If you are Log Out click this Button</p>
-                </div>
-                <div class="modal-footer">
-                    <center>
-                        <button type="button" class="btn1 btn-warning" style="text-decoration: none;
-                            display: inline-block; color: white;" onclick="delayedLogout()">
-                            Log Out
-                        </button>
-                    </center>
-                </div>
-            </div>
+        window.addEventListener('load', function () {
+            spinnerWrapper.style.display = 'none';
+        });
+    </script>
+    <!--  spinner Effect  End-->
+
+    <div class="container">
+        <div class="well" style="margin-top: 80px; color: red; font-size: 30px;">
+            <center>Insert Employee Data </center>
         </div>
     </div>
-    <script>
-        function delayedLogout() {
-            setTimeout(function () {
-                window.location.href = "{% url 'logout' %}";
-            }, 1000); // 2-second delay
-        }
-    </script>
 
     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
         {% csrf_token %}
@@ -140,9 +174,7 @@
         </div><br>
 
         <input type="submit" onclick="return confirms()" value="Insert" id="btn1" style="margin-left:200px;">
-        <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;"
-                href="/showall/">Show-All Data</a></button>
-
+       
     </form>
 
     <script type="text/javascript">

@@ -30,91 +30,130 @@
             width: 120px;
             height: 32px;
         }
+
+        /* spinner css start */
+        .spinner-wrapper {
+            width: 100%;
+            height: 100%;
+            background-color: #f8f6f6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            position: relative;
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+        }
+
+        .spinner::before,
+        .spinner:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .spinner:before {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(90deg, #c59d5f 0%, #515151 100%);
+            animation: spin .5s infinite linear;
+        }
+
+        .spinner:after {
+            width: 90%;
+            height: 90%;
+            background-color: #f3f0f0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* spinner css end */
     </style>
 
     <title>Employee Data Show</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
-            <center>Show Data <a data-toggle="modal" style="cursor: pointer; text-decoration: none;
-                display: inline-block; 
-                color: red" data-target="#myModal"> Welcome {{ user_name }}</a></center>
+    {% include 'header.html' %}
+
+    <!--  spinner Effect  -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <p>If you are Log Out click this Button</p>
-                </div>
-                <div class="modal-footer">
-                    <center>
-                        <button type="button" class="btn1 btn-warning" style="text-decoration: none;
-                            display: inline-block; color: white;" onclick="delayedLogout()">
-                            Log Out
-                        </button>
-                    </center>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function delayedLogout() {
-            setTimeout(function () {
-                window.location.href = "{% url 'logout' %}";
-            }, 1000); // 2-second delay
-        }
+    <script type="text/javascript">
+        let spinnerWrapper = document.querySelector('.spinner-wrapper');
+
+        window.addEventListener('load', function () {
+            spinnerWrapper.style.display = 'none';
+        });
     </script>
-    <center>
-        <button id="btn1"><a style="display: inline-block; text-decoration: none; color: white;"
-                href="{% url 'insert' %}">Privious</a></button>
-    </center><br>
+    <!--  spinner Effect  End-->
+
+
     <div class="container">
-        <table class="table table-hover">
-            <thead>
-                <tr class="success">
-                    <th>Employe id</th>
-                    <th>Employe Name</th>
-                    <th>Employe Address</th>
-                    <th>Employe Salary</th>
-                    <th>Employe City</th>
-                    <th>Employe Images</th>
-                    <th></th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for x in showdata %}
-                <form>
-                    <tr>
-                        <th width="16%"> <a href="/profile/{{ x.eid }}">{{ x.eid }}</a></th>
-                        <th width="16%"> {{ x.ename }} </th>
-                        <th width="16%"> {{ x.eadd }} </th>
-                        <th width="16%"> {{ x.esal }} </th>
-                        <th width="16%"> {{ x.ecity }} </th>
-                        <th width="16%"> <img src="{{ x.eimg.url }}" style="width:30%;"></th>
-                        <th width="16%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
-                        <th>
-                            {% if emp.qr_code %}
-                                <img src="{{ x.qr_code.url }}" width="100">
-                            {% else %}
-                                <a href="{% url 'generate_qr_image' x.eid %}">Generate QR</a>
-                            {% endif %}
-                        </th>
+        <div class="well" style="margin-top: 80px; color: red; font-size: 30px;">
+            <center>Show All Employee Data </center>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>Employe View</th>
+                        <th>Employe Name</th>
+                        <th>Employe Address</th>
+                        <th>Employe Salary</th>
+                        <th>Employe City</th>
+                        <th>Employe Images</th>
+                        <th>Delete</th>
+                        <th>QR</th>
                     </tr>
-                </form>
-                {% endfor %}
+                </thead>
+                <tbody>
+                    {% for x in showdata %}
+                    <form>
+                        <tr>
+                            <th>
+                                <a href="{% url 'generate_qr_image' x.eid %}">View profilr</a>
+                            </th>
+                            <th width="16%"> {{ x.ename }} </th>
+                            <th width="16%"> {{ x.eadd }} </th>
+                            <th width="16%"> {{ x.esal }} </th>
+                            <th width="16%"> {{ x.ecity }} </th>
+                            <th width="16%"> <img src="{{ x.eimg.url }}" style="width:30%;"></th>
+                            <th width="16%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
+                            <th>
+                                {% if x.qr_code %}
+                                <img src="{{ x.qr_code.url }}" width="100">
+                                {% else %}
+                                <a href="{% url 'generate_qr_image' x.eid %}">View profilr</a>
+                                {% endif %}
+                            </th>
 
-            </tbody>
-        </table>
+                        </tr>
+                    </form>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
