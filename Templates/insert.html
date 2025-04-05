@@ -21,17 +21,8 @@
             color: white;
         }
 
-        #btn1 {
-            background-image: radial-gradient(#027882, #024045);
-            color: white;
-            border-color: #024045;
-            border-radius: 30px;
-            width: 120px;
-            height: 32px;
-            margin-left: 80px;
-        }
-                /* spinner css start */
-                .spinner-wrapper {
+        /* spinner css start */
+        .spinner-wrapper {
             width: 100%;
             height: 100%;
             background-color: #f8f6f6;
@@ -88,8 +79,8 @@
 
 <body>
     {% include 'header.html' %}
-     <!--  spinner Effect  -->
-     <div class="spinner-wrapper">
+    <!--  spinner Effect  -->
+    <div class="spinner-wrapper">
         <div class="spinner">
         </div>
     </div>
@@ -101,81 +92,96 @@
         });
     </script>
     <!--  spinner Effect  End-->
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title" style="color: red;"><b>View Employee Data</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <img src="{{ showdata.eimg.url }}" alt="{{ showdata.ename }}"
+                            class="img-responsive center-block" style="max-width: 100px; height: auto;">
+                    </div>
 
-    <div class="container">
-        <div class="well" style="margin-top: 80px; color: red; font-size: 30px;">
-            <center>Insert Employee Data </center>
+                    <!-- ID -->
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2" for="eid">Id</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" name="eid" placeholder="User Id" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2" for="ename">Name</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="txt" class="form-control" name="ename" placeholder="Name" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2" for="eadd">Address</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input type="text" class="form-control" name="eadd" placeholder="Address" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salary -->
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2" for="esal">Salary</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                                <input type="text" class="form-control" name="esal" placeholder="Salary" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- City -->
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-2" for="ecity">City</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <input type="text" class="form-control" name="ecity" placeholder="City" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Image -->
+                    <div class="form-group row">
+                        <label for="eimg" class="col-sm-2 control-label">Profile Image</label>
+
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                                <input type="file" class="form-control" id="eimg" name="eimg"
+                                    placeholder="Profile Image" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <input type="submit" class="btn btn-warning" style="width: 150px;" onclick="return confirms()"
+                            value="Insert">
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
-
-    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
-        {% csrf_token %}
-
-        <div class="form-group">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="pwd">Eployee Id</label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" class="form-control" name="eid" placeholder="User Id" required>
-                    </div>
-                </div>
-            </div>
-
-            <label class="control-label col-sm-2" for="email">Name</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="ename" placeholder="Name" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Address</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="eadd" id="pwd" placeholder="Address" required>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Salary</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="esal" placeholder="Salary" required>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">City</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" name="ecity" placeholder="City" required>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Profile Images</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="file" class="form-control" name="eimg" placeholder="Profile Images" required>
-                </div>
-            </div>
-        </div><br>
-
-        <input type="submit" onclick="return confirms()" value="Insert" id="btn1" style="margin-left:200px;">
-       
-    </form>
 
     <script type="text/javascript">
         function confirms() {
