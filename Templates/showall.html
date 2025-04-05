@@ -133,13 +133,13 @@
                             <th>
                                 <a href="{% url 'generate_qr_image' x.eid %}">View profilr</a>
                             </th>
-                            <th width="16%"> {{ x.ename }} </th>
-                            <th width="16%"> {{ x.eadd }} </th>
-                            <th width="16%"> {{ x.esal }} </th>
-                            <th width="16%"> {{ x.ecity }} </th>
-                            <th width="16%"> <img src="{{ x.eimg.url }}" style="width:30%;"></th>
-                            <th width="16%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
-                            <th>
+                            <th width="12.5%"> {{ x.ename }} </th>
+                            <th width="12.5%"> {{ x.eadd }} </th>
+                            <th width="12.5%"> {{ x.esal }} </th>
+                            <th width="12.5%"> {{ x.ecity }} </th>
+                            <th width="12.5%"> <img src="{{ x.eimg.url }}" style="width:70%;"></th>
+                            <th width="12.5%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
+                            <th width="12.5%">
                                 {% if x.qr_code %}
                                 <img src="{{ x.qr_code.url }}" width="100">
                                 {% else %}
