@@ -101,83 +101,75 @@
     </script>
     <!--  spinner Effect  End-->
 
-    <div class="container">
-        <div class="well" style="margin-top: 10px; color: red; font-size: 30px;">
-            <center>View Employee Data</center>
-        </div>
-    </div>
 
-    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
-        {% csrf_token %}
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Profile Images</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <img src="{{ showdata.eimg.url }}" alt="{{ showdata.ename }}" width="100">
-
-                </div>
+    <div class="modal-dialog" style="margin-top: 80px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <center style="color: red;">View Employee Data</center>
+                </h4>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="pwd">Eployee Id</label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" class="form-control" value="{{ showdata.eid }}" name="eid"
-                            placeholder="User Id" readonly>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
+                    <center>
+                    <div class="form-group" >
+                               <img src="{{ showdata.eimg.url }}" alt="{{ showdata.ename }}" width="100"> 
                     </div>
-                </div>
-            </div>
-
-            <label class="control-label col-sm-2" for="email">Name</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" value="{{ showdata.ename }}" name="ename" placeholder="Name"
-                        readonly>
-                </div>
+                </center>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="employe">Id</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="txt" class="form-control" value="{{ showdata.eid }}" name="eid"
+                                    placeholder="User Id" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="email">Name</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="txt" class="form-control" value="{{ showdata.ename }}" name="ename"
+                                    placeholder="Name" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="pwd">Address</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="txt" class="form-control" name="eadd" value="{{ showdata.eadd }}" id="pwd"
+                                    placeholder="Address" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="pwd">Salary</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="txt" class="form-control" name="esal" value="{{ showdata.esal }}"
+                                    placeholder="Salary" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="pwd">City</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" name="ecity" value="{{ showdata.ecity }}"
+                                    placeholder="City" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Address</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="eadd" value="{{ showdata.eadd }}" id="pwd"
-                        placeholder="Address" readonly>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Salary</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="txt" class="form-control" name="esal" value="{{ showdata.esal }}" placeholder="Salary"
-                        readonly>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">City</label>
-            <div class="col-sm-4">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" class="form-control" name="ecity" value="{{ showdata.ecity }}" placeholder="City"
-                        readonly>
-                </div>
-            </div>
-        </div>
-
-       
-    </form>
 
 </body>
 
