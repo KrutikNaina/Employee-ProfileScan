@@ -38,8 +38,10 @@ urlpatterns = [
     path('profile/<str:userid>/', views.profile, name='profile'),
     path("insertafter/",views.insertafter, name="insertafter"),
     path('delete/<str:userid>',views.delete),
-    path('generate_qr_image/<str:eid>/', views.generate_qr_and_save, name='generate_qr_image'),
+    path('generate_qr_image/<str:eid>/', views.insertafter, name='generate_qr_image'),
     path('logout/', views.logout, name='logout'),
+    path("generate_qr/<str:eid>/", views.insertafter, name="generate_qr"),
+
 ]
 
 handler404 = 'QR_Employee_Scanner.views.custom_404_view'  # ✅ Use the actual app name

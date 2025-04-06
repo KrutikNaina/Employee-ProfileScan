@@ -14,20 +14,20 @@ import logging
 
 
 
-def generate_qr_and_save(request, eid):
-    employee = get_object_or_404(Employee, eid=eid)
-    qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
+# def generate_qr_and_save(request, eid):
+#     employee = get_object_or_404(Employee, eid=eid)
+#     qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
 
-    # Generate QR Code
-    qr_img = qrcode.make(qr_data)
-    buffer = BytesIO()
-    qr_img.save(buffer)
-    filename = f'{employee.eid}_qr.png'
+#     # Generate QR Code
+#     qr_img = qrcode.make(qr_data)
+#     buffer = BytesIO()
+#     qr_img.save(buffer)
+#     filename = f'{employee.eid}_qr.png'
 
-    # Save to employee
-    employee.qr_code.save(filename, File(buffer), save=True)
+#     # Save to employee
+#     employee.qr_code.save(filename, File(buffer), save=True)
 
-    return render(request, 'profile.html', {'showdata': employee})
+#     return render(request, 'profile.html', {'showdata': employee})
 
 def scan_qr_page(request):
     if 'user_id' in request.session:
@@ -117,16 +117,46 @@ def showall(request):
     else:
         return redirect('/login/')  # Redirect to login if not logged in
 
+# def insertafter(request):
+# 	eid = (request.POST["eid"])
+# 	ename = (request.POST["ename"])
+# 	eadd =  (request.POST["eadd"])
+# 	esal = int (request.POST["esal"])
+# 	ecity = (request.POST["ecity"])
+# 	eimg = (request.FILES["eimg"])
+# 	res = Employee( eid = eid, ename =ename, eadd = eadd, esal = esal, ecity = ecity, eimg=eimg)
+# 	res.save()
+# 	return redirect("insert") 
+
 def insertafter(request):
-	eid = (request.POST["eid"])
-	ename = (request.POST["ename"])
-	eadd =  (request.POST["eadd"])
-	esal = int (request.POST["esal"])
-	ecity = (request.POST["ecity"])
-	eimg = (request.FILES["eimg"])
-	res = Employee( eid = eid, ename =ename, eadd = eadd, esal = esal, ecity = ecity, eimg=eimg)
-	res.save()
-	return redirect("insert") 
+    if request.method == "POST":
+        eid = request.POST["eid"]
+        ename = request.POST["ename"]
+        eadd = request.POST["eadd"]
+        esal = int(request.POST["esal"])
+        ecity = request.POST["ecity"]
+        eimg = request.FILES["eimg"]
+
+        # Check if the employee ID already exists
+        if Employee.objects.filter(eid=eid).exists():
+            messages.error(request, f"Employee ID {eid} already exists. Please use a unique ID.")
+            return redirect("insert")
+
+        # Save employee
+        res = Employee(eid=eid, ename=ename, eadd=eadd, esal=esal, ecity=ecity, eimg=eimg)
+        res.save()
+
+        # ✅ Generate QR Code
+        qr_data = f"https://employee-profilescan.onrender.com/profile/{res.eid}/"
+        qr_img = qrcode.make(qr_data)
+        buffer = BytesIO()
+        qr_img.save(buffer)
+        filename = f"{res.eid}_qr.png"
+        res.qr_code.save(filename, File(buffer), save=True)
+
+        messages.success(request, "Employee added successfully with QR Code.")
+        return redirect("insert")
+
 
 def delete(request,userid):
 	empdata = Employee.objects.get(eid=userid)

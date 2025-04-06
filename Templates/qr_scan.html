@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +9,7 @@
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(to right, #96acb6, #738c94, #90cae3);
       font-family: Arial, sans-serif;
       color: white;
       display: flex;
@@ -45,26 +46,98 @@
         top: 0%;
         opacity: 0;
       }
+
       10% {
         opacity: 1;
       }
+
       50% {
         top: 95%;
         opacity: 1;
       }
+
       90% {
         opacity: 1;
       }
+
       100% {
         top: 0%;
         opacity: 0;
       }
     }
+
+
+    /* spinner css start */
+    .spinner-wrapper {
+      width: 100%;
+      height: 100%;
+      background-color: #f8f6f6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spinner {
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+    }
+
+    .spinner::before,
+    .spinner:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .spinner:before {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(90deg, #c59d5f 0%, #515151 100%);
+      animation: spin .5s infinite linear;
+    }
+
+    .spinner:after {
+      width: 90%;
+      height: 90%;
+      background-color: #f3f0f0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* spinner css end */
   </style>
 </head>
 
 <body>
   {% include 'header.html' %}
+
+  <!--  spinner Effect  -->
+  <div class="spinner-wrapper">
+    <div class="spinner">
+    </div>
+  </div>
+  <script type="text/javascript">
+    let spinnerWrapper = document.querySelector('.spinner-wrapper');
+
+    window.addEventListener('load', function () {
+      spinnerWrapper.style.display = 'none';
+    });
+  </script>
+  <!--  spinner Effect  End-->
+
 
   <div id="qr-container">
     <div id="reader"></div>
@@ -114,4 +187,5 @@
     }).catch(err => console.error("Camera access error", err));
   </script>
 </body>
+
 </html>

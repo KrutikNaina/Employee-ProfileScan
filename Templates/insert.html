@@ -72,6 +72,29 @@
         }
 
         /* spinner css end */
+
+
+        .loading-spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #333;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
     <title>Insert Employee Data</title>
@@ -99,6 +122,23 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/insertafter/">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert 
+                {% if message.tags == 'error' %}alert-danger
+                {% elif message.tags == 'success' %}alert-success
+                {% elif message.tags == 'warning' %}alert-warning
+                {% else %}alert-info
+                {% endif %} 
+                alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ message.tags|title }}!</strong> {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
                     {% csrf_token %}
                     <div class="form-group text-center">
                         <img src="{{ showdata.eimg.url }}" alt="{{ showdata.ename }}"
@@ -173,21 +213,40 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-4">
-                        <input type="submit" class="btn btn-warning" style="width: 150px;" onclick="return confirms()"
-                            value="Insert">
-                    </div>
+                    <form onsubmit="return showSpinner(this)">
+                        <div class="text-center mt-4">
+                            <button type="submit" id="submitBtn" class="btn btn-warning" style="width: 150px;">
+                                <span class="loading-spinner" style="display: none;" id="spinner"></span>
+                                <span id="btnText">Insert</span>
+                            </button>
+                        </div>
+                    </form>
+
 
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        function showSpinner(form) {
+            var btn = document.getElementById('submitBtn');
+            var spinner = document.getElementById('spinner');
+            var btnText = document.getElementById('btnText');
 
-    <script type="text/javascript">
-        function confirms() {
-            return confirm("Data insert!");
+            // Disable button to prevent double submissions
+            btn.disabled = true;
+
+            // Show spinner, hide button text
+            spinner.style.display = 'inline-block';
+            btnText.textContent = 'Loading...';
+
+            return true; // Allow form to submit
         }
     </script>
+
+
+
+
 </body>
 
 </html>
