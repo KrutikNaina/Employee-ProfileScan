@@ -14,20 +14,20 @@ import logging
 
 
 
-# def generate_qr_and_save(request, eid):
-#     employee = get_object_or_404(Employee, eid=eid)
-#     qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
+def generate_qr_and_save(request, eid):
+    employee = get_object_or_404(Employee, eid=eid)
+    qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
 
-#     # Generate QR Code
-#     qr_img = qrcode.make(qr_data)
-#     buffer = BytesIO()
-#     qr_img.save(buffer)
-#     filename = f'{employee.eid}_qr.png'
+    # Generate QR Code
+    qr_img = qrcode.make(qr_data)
+    buffer = BytesIO()
+    qr_img.save(buffer)
+    filename = f'{employee.eid}_qr.png'
 
-#     # Save to employee
-#     employee.qr_code.save(filename, File(buffer), save=True)
+    # Save to employee
+    employee.qr_code.save(filename, File(buffer), save=True)
 
-#     return render(request, 'profile.html', {'showdata': employee})
+    return render(request, 'profile.html', {'showdata': employee})
 
 def scan_qr_page(request):
     if 'user_id' in request.session:
