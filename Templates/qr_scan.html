@@ -1,12 +1,117 @@
-<script src="https://unpkg.com/html5-qrcode"></script>
-<div id="reader" style="width: 300px;"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fast QR Code Scanner</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-<script>
-  function onScanSuccess(decodedText, decodedResult) {
-    window.location.href = decodedText;
-  }
+    #qr-container {
+      width: 90%;
+      max-width: 360px;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+    }
 
-  let html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 250 });
-  html5QrcodeScanner.render(onScanSuccess);
-</script>
+    #reader {
+      width: 100%;
+    }
+
+    .scan-line {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #00eaff;
+      top: 0;
+      animation: scan 2s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes scan {
+      0% {
+        top: 0%;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        top: 95%;
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        top: 0%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'header.html' %}
+
+  <div id="qr-container">
+    <div id="reader"></div>
+    <div class="scan-line"></div>
+  </div>
+
+  <script>
+    const html5QrCode = new Html5Qrcode("reader");
+
+    const config = {
+      fps: 15, // Higher FPS for faster tracking
+      qrbox: { width: 250, height: 250 },
+      aspectRatio: 1.0,
+      disableFlip: true
+    };
+
+    function isValidURL(str) {
+      try {
+        const url = new URL(str);
+        return url.protocol === "http:" || url.protocol === "https:";
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function onScanSuccess(decodedText, decodedResult) {
+      console.log("Decoded:", decodedText);
+      html5QrCode.stop().then(() => {
+        if (isValidURL(decodedText)) {
+          window.location.href = decodedText;
+        } else {
+          alert("Invalid QR content:\n" + decodedText);
+        }
+      }).catch(err => console.error("Failed to stop scanner", err));
+    }
+
+    Html5Qrcode.getCameras().then(cameras => {
+      if (cameras && cameras.length) {
+        html5QrCode.start(
+          { facingMode: "environment" }, // Rear camera
+          config,
+          onScanSuccess
+        ).catch(err => console.error("Start failed", err));
+      } else {
+        alert("No camera found on this device.");
+      }
+    }).catch(err => console.error("Camera access error", err));
+  </script>
+</body>
+</html>

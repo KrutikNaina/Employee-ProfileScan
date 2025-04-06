@@ -31,6 +31,7 @@ urlpatterns = [
     path("",views.insert, name="insert"),
     path("showall/",views.showall, name="showall"),
     path("login/",views.login, name="login"),
+    path('scan/', views.scan_qr_page, name='scan_qr_page'),
     path("signup/",views.signup, name="signup"),
     path("signupafter/",views.signupafter, name="signupafter"),
     path('loginafter/',views.loginafter, name="loginafter"),

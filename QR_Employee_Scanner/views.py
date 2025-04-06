@@ -29,6 +29,14 @@ def generate_qr_and_save(request, eid):
 
     return render(request, 'profile.html', {'showdata': employee})
 
+def scan_qr_page(request):
+    if 'user_id' in request.session:
+        return render(request, 'qr_scan.html', {'user_name': request.session.get('user_name')})
+    else:
+        return redirect('/login/')  # Redirect to login if not logged in
+
+
+
 # Set up a logger
 logger = logging.getLogger(__name__)
 
