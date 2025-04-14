@@ -161,13 +161,14 @@
             {% endif %}
 
             {% csrf_token %}
-            <label for="email">Username:</label>
-            <input type="email" name="email" placeholder="Enter your Username" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Enter your Email" required>
 
             <label for="password">Password:</label>
             <input type="password" name="password" placeholder="Enter your Password" required>
 
-            <input id="button" type="submit" value="Log In">
+            <input id="button" type="submit" value="Log In"><br><br>
+            <p class="sign_up">Don't have an account? <a href="/signup/">Sign Up</a></p>
         </form>
     </div>
 

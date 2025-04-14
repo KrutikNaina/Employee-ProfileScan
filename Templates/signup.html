@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     
     <style>
         /*style.css*/
@@ -82,7 +82,7 @@
 
 <body>
     <div class="main">
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
 
 
         <form action="/signupafter/"  enctype="multipart/form-data" method="POST">
@@ -105,13 +105,14 @@
             <label for="first">Username:</label>
             <input type="text"  name="name" placeholder="Enter your Username" required>
 
-            <label for="first">Username:</label>
-            <input type="email"  name="email" placeholder="Enter your Username" required>
+            <label for="first">Email:</label>
+            <input type="email"  name="email" placeholder="Enter your Email" required>
         
             <label for="password">Password:</label>
             <input type="password"  name="password" placeholder="Enter your Password" required>
         
-            <input class="wrap" id="button" type="submit" value="Log In">
+            <input class="wrap" id="button" type="submit" value="Sign Up">
+            <p class="sign_up">You have an account? <a href="/login/">Log In</a></p>
         </form>
         
         
