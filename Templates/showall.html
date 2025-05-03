@@ -122,28 +122,37 @@
                         <th>Employe Salary</th>
                         <th>Employe City</th>
                         <th>Employe Images</th>
-                        <th>Delete</th>
                         <th>QR</th>
+                        <th>Delete</th>
+                        <th>Download QR</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for x in showdata %}
                     <form>
                         <tr>
-                            <th>
+                            <th width="10%">
                                 <a href="{% url 'generate_qr_image' x.eid %}">View profile</a>
                             </th>
                             <th width="12.5%"> {{ x.ename }} </th>
                             <th width="12.5%"> {{ x.eadd }} </th>
-                            <th width="12.5%"> {{ x.esal }} </th>
-                            <th width="12.5%"> {{ x.ecity }} </th>
+                            <th width="8%"> {{ x.esal }} </th>
+                            <th width="10%"> {{ x.ecity }} </th>
                             <th width="12.5%"> <img src="{{ x.eimg.url }}" style="width:70%;"></th>
-                            <th width="12.5%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
                             <th width="12.5%">
                                 {% if x.qr_code %}
-                                <img src="{{ x.qr_code.url }}" width="100">
+                                    <img src="{{ x.qr_code.url }}" width="120"><br>
                                 {% else %}
-                                <a href="{% url 'generate_qr_image' x.eid %}">View profile</a>
+                                    <a href="{% url 'generate_qr_image' x.eid %}">Generate QR</a>
+                                {% endif %}
+                            </th>
+                            <th width="8%"> <a href="/delete/{{ x.eid }}" onclick="return confirms()">Delete</a></th>
+                            <th width="11%">
+                                {% if x.qr_code %}
+                                   
+                                    <a href="{{ x.qr_code.url }}" download="{{ x.eid }}_qr.png">
+                                        <button type="button">Download QR</button>
+                                    </a>
                                 {% endif %}
                             </th>
 

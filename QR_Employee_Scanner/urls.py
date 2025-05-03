@@ -40,6 +40,8 @@ urlpatterns = [
     path('delete/<str:userid>',views.delete),
     path('generate_qr_image/<str:eid>/', views.generate_qr_and_save, name='generate_qr_image'),  # <-- comma added
     path('logout/', views.logout, name='logout'),
+    path('generate_qr/<str:eid>/', views.generate_qr_and_save, name='generate_qr'),
+    path('update/', views.update_employee, name='update_employee'),
 
 ]
 

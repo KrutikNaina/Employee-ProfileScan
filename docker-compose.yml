@@ -1,9 +1,17 @@
-version: '3.9'
+version: '3.8'  # (You can remove this version line, Docker warned it's obsolete)
 
 services:
   web:
     build: .
-    ports:
-      - "8000:8000"
+    container_name: qr_employee_scanner-web
     volumes:
       - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: nouchka/sqlite3  # For SQLite, you technically don't need a container, but this works for dev/test
+    volumes:
+      - ./data:/data

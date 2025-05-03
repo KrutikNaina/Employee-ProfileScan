@@ -11,6 +11,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.http import HttpResponseRedirect
 import qrcode #QR 
 import logging
+from datetime import datetime
 
 
 
@@ -154,8 +155,17 @@ def insertafter(request):
         filename = f"{res.eid}_qr.png"
         res.qr_code.save(filename, File(buffer), save=True)
 
-        messages.success(request, "Employee added successfully with QR Code.")
+        # ✅ Mark Attendance (Optional: Set as "present" for the current day)
+        attendance = Attendance.objects.create(employee=res, status="present", date=datetime.today().date())
+
+        # You can also capture the time-in here if you want
+        attendance.time_in = datetime.now().time()
+        attendance.save()
+
+        messages.success(request, "Employee added successfully with QR Code and attendance marked.")
         return redirect("insert")
+
+    return render(request, "insert.html")
 
 
 def delete(request,userid):
@@ -166,3 +176,21 @@ def delete(request,userid):
 def logout(request):
     request.session.flush()  # Clear session
     return redirect('/login/')  # Redirect to login after logout
+
+def update_employee(request):
+    if request.method == "POST":
+        eid = request.POST["eid"]
+        employee = get_object_or_404(Employee, eid=eid)
+
+        employee.ename = request.POST["ename"]
+        employee.eadd = request.POST["eadd"]
+        employee.esal = request.POST["esal"]
+        employee.ecity = request.POST["ecity"]
+
+        if "eimg" in request.FILES:
+            employee.eimg = request.FILES["eimg"]
+
+        employee.save()
+        return HttpResponseRedirect('/showall/')
+    else:
+        return HttpResponseRedirect('/showall/')
