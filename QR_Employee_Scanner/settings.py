@@ -54,12 +54,6 @@ ALLOWED_HOSTS = [ "employee-profilescan.krutiknaina.com",
 #     "employee-profilescan.onrender.com",  # Make sure this is included
 # ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://employee-profilescan.krutiknaina.com",
-]
-
-
-
 # Application definition
 
 INSTALLED_APPS = [
