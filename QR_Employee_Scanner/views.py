@@ -17,7 +17,7 @@ from datetime import datetime
 
 def generate_qr_and_save(request, eid):
     employee = get_object_or_404(Employee, eid=eid)
-    qr_data = f"https://employee-profilescan.onrender.com/profile/{employee.eid}/"
+    qr_data = f"https://employee-profilescan.krutiknaina.com/profile/{employee.eid}/"
 
     # Generate QR Code
     qr_img = qrcode.make(qr_data)
@@ -148,19 +148,12 @@ def insertafter(request):
         res.save()
 
         # ✅ Generate QR Code
-        qr_data = f"https://employee-profilescan.onrender.com/profile/{res.eid}/"
+        qr_data = f"https://employee-profilescan.krutiknaina.com/profile/{res.eid}/"
         qr_img = qrcode.make(qr_data)
         buffer = BytesIO()
         qr_img.save(buffer)
         filename = f"{res.eid}_qr.png"
         res.qr_code.save(filename, File(buffer), save=True)
-
-        # ✅ Mark Attendance (Optional: Set as "present" for the current day)
-        attendance = Attendance.objects.create(employee=res, status="present", date=datetime.today().date())
-
-        # You can also capture the time-in here if you want
-        attendance.time_in = datetime.now().time()
-        attendance.save()
 
         messages.success(request, "Employee added successfully with QR Code and attendance marked.")
         return redirect("insert")
